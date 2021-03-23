@@ -1,0 +1,27 @@
+<mat-card style="text-align: center">
+  <mat-form-field>
+    <mat-label>Search all Gifs...</mat-label>
+    <input matInput placeholder="Eg. Puppies" [(ngModel)]="searchTerm" />
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="searchBtn"
+    (click)="search()"
+  >
+    Search
+  </button>
+</mat-card>
+
+<mat-grid-list cols="4" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let result of giphyService.searchResults$ | async"
+    ><img
+      class="thumbnailImg"
+      [src]="result.images['480w_still'].url"
+      [alt]="result.title"
+      (click)="openDialog(result)"
+      width="250px"
+      height="200px"
+  /></mat-grid-tile>
+</mat-grid-list>
